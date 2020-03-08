@@ -1,0 +1,49 @@
+{
+    "settings": {
+        "index": {
+            "number_of_shards": 1,
+            "number_of_replicas": 0
+        }
+    },
+    "analysis": {
+        "filter": {
+            "filtro_autocomplete": {
+                "type": "edge_ngram",
+                "min_gram": 3,
+                "max_gram": 20
+            }
+        }
+    },
+    "analyzer": {
+        "autocomplete": {
+            "type": "custom",
+            "tokenizer": "standart",
+            "filter": [ "portuguese", "filtro_autocomplete" ]
+        }
+    },
+    "mappings": {
+        "produtos": {
+            "_all": {
+                "type": "text",
+                "analyzer": "portuguese"
+            },
+            "properties": {
+                "nome": {
+                    "fields": {
+                        "original": { "type": "keyword"},
+                        "autocomplete": { "type": "text", "analyzer": "portuguese"}
+                    },
+                    "type": "text",
+                    "analyzer": "portuguese"
+                },
+                "categoria": {
+                    "fields": {
+                        "original": { "type": "keyword"}
+                    },
+                    "type": "text",
+                    "analyzer": "portuguese"
+                }
+            }
+        }
+    }
+}
