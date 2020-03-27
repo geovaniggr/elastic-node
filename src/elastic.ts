@@ -84,15 +84,11 @@ function putSettings(){
 
 async function run() {
 
-    //await putMapping();
-    //await putFilter();
+    await putMapping();
+    await putFilter();
     await putSettings();
-
     const data = await client.indices.getMapping({index: "catalogo"});
-
     console.log(data);
-
-
 }
 
 run().catch(console.log);
